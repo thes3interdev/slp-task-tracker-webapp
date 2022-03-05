@@ -42,4 +42,40 @@
 	.task-close {
 		@apply cursor-pointer text-red-600;
 	}
+
+	.task-reminder {
+		@apply border-l-4 border-green-900;
+	}
+
+	.add-form {
+		@apply mb-10;
+	}
+
+	.form-control {
+		@apply my-5;
+	}
+
+	.form-control-label {
+		@apply block;
+	}
+
+	.form-control-input {
+		@apply m-1 h-10 w-full px-2 py-1 text-lg;
+	}
+
+	.form-control-check {
+		@apply flex items-center justify-between;
+	}
+
+	.form-control-check-label {
+		@apply flex-1;
+	}
+
+	.form-control-check-input {
+		@apply h-5 flex-auto;
+	}
+
+	.footer {
+		@apply mt-8 text-center;
+	}
 }
