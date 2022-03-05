@@ -9,10 +9,15 @@ const App = () => {
 		{ id: 3, text: 'Shopping', day: 'Feb 7th at 10:30am', reminder: false },
 	]);
 
+	/** delete task */
+	const deleteTask = (id) => {
+		setTasks(tasks.filter((task) => task.id !== id));
+	};
+
 	return (
 		<div className="container">
 			<Header title="Task Manager" />
-			<Tasks tasks={tasks} />
+			<Tasks tasks={tasks} onDelete={deleteTask} />
 		</div>
 	);
 };
