@@ -23,6 +23,10 @@
 		@apply mb-5 flex items-center justify-between;
 	}
 
+	.title {
+		@apply text-3xl font-semibold;
+	}
+
 	.btn {
 		@apply m-1 inline-block cursor-pointer rounded-md bg-slate-700 py-2 px-5 text-sm font-semibold uppercase text-white hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-700 focus:ring-offset-2;
 	}
