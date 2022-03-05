@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
+import About from './components/About';
 
 const App = () => {
 	const [tasks, setTasks] = useState([]);
@@ -55,10 +58,14 @@ const App = () => {
 
 	/** delete a task */
 	const deleteTask = async (id) => {
-		await fetch(`/tasks/${id}`, {
+		const res = await fetch(`/tasks/${id}`, {
 			method: 'DELETE',
 		});
-		setTasks(tasks.filter((task) => task.id !== id));
+
+		/** we should control the response status to decide if we shall change the state or not */
+		res.status === 200
+			? setTasks(tasks.filter((task) => task.id !== id))
+			: alert('There was an error while deleting the task.');
 	};
 
 	/** toggle reminder */
@@ -80,15 +87,28 @@ const App = () => {
 	};
 
 	return (
-		<div className="container">
-			<Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
-			{showAddTask && <AddTask onAdd={addTask} />}
-			{tasks.length > 0 ? (
-				<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
-			) : (
-				'There are currently no tasks are available...'
-			)}
-		</div>
+		<Router>
+			<div className="container">
+				<Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<>
+								{showAddTask && <AddTask onAdd={addTask} />}
+								{tasks.length > 0 ? (
+									<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
+								) : (
+									'There are currently no tasks are available...'
+								)}
+							</>
+						}
+					/>
+					<Route path="/about" element={<About />} />
+				</Routes>
+				<Footer />
+			</div>
+		</Router>
 	);
 };
 
