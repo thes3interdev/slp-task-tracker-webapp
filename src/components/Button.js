@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 
-const Button = ({ buttonText }) => {
-	return <button className="btn">{buttonText}</button>;
+const Button = ({ buttonText, onClick }) => {
+	return (
+		<button className="btn" onClick={onClick}>
+			{buttonText}
+		</button>
+	);
 };
 
 Button.defaultProps = {
@@ -10,6 +14,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
 	text: PropTypes.string,
+	onClick: PropTypes.func,
 };
 
 export default Button;
