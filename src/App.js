@@ -10,6 +10,14 @@ const App = () => {
 		{ id: 3, text: 'Shopping', day: 'Feb 7th at 10:30am', reminder: false },
 	]);
 
+	/** add a task */
+	const addTask = (task) => {
+		const id = Math.floor(Math.random() * 10000) + 1;
+		const newTask = { id, ...task };
+
+		setTasks([...tasks, newTask]);
+	};
+
 	/** delete a task */
 	const deleteTask = (id) => {
 		setTasks(tasks.filter((task) => task.id !== id));
@@ -23,7 +31,7 @@ const App = () => {
 	return (
 		<div className="container">
 			<Header title="Simple Task Manager" />
-			<AddTask />
+			<AddTask onAdd={addTask} />
 			{tasks.length > 0 ? (
 				<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
 			) : (
