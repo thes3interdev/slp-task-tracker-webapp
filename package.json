@@ -1,8 +1,8 @@
 {
-	"name": "starter-react-tailwindcss",
+	"name": "slp-task-tracker",
 	"version": "1.0.0",
 	"private": true,
-	"description": "Starter template for React.js projects.",
+	"description": "Sample learning project to build a Task Tracker while learning the basics of React.js.",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
