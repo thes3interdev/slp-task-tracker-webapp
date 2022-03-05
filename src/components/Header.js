@@ -1,5 +1,10 @@
 const Header = ({ title }) => {
-	return <header>{title}</header>;
+	return (
+		<header className="header">
+			<h2>{title}</h2>
+			<button className="btn">Add Task</button>
+		</header>
+	);
 };
 
 Header.defaultProps = {
