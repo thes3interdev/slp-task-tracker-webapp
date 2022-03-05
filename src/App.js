@@ -25,6 +25,14 @@ const App = () => {
 		return data;
 	};
 
+	/** fetch single task */
+	const fetchTask = async (id) => {
+		const res = await fetch(`/tasks/${id}`);
+		const data = await res.json();
+
+		return data;
+	};
+
 	/** add a task */
 	const addTask = async (task) => {
 		// const id = Math.floor(Math.random() * 10000) + 1;
@@ -47,13 +55,28 @@ const App = () => {
 
 	/** delete a task */
 	const deleteTask = async (id) => {
-		await fetch(`/tasks/${id}`, { method: 'DELETE' });
+		await fetch(`/tasks/${id}`, {
+			method: 'DELETE',
+		});
 		setTasks(tasks.filter((task) => task.id !== id));
 	};
 
 	/** toggle reminder */
-	const toggleReminder = (id) => {
-		setTasks(tasks.map((task) => (task.id === id ? { ...task, reminder: !task.reminder } : task)));
+	const toggleReminder = async (id) => {
+		const taskToToggle = await fetchTask(id);
+		const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+
+		const res = await fetch(`/tasks/${id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: JSON.stringify(updatedTask),
+		});
+
+		const data = await res.json;
+
+		setTasks(tasks.map((task) => (task.id === id ? { ...task, reminder: data.reminder } : task)));
 	};
 
 	return (
